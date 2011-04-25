@@ -380,6 +380,7 @@ module RubyCAS
       # Rails session id.
       # Returns the filename of the lookup file created.
       def store_service_session_lookup(st, sid)
+        FileUtils.mkdir_p("#{Rails.root}/tmp/sessions/")
         st = st.ticket if st.kind_of? CASClient::ServiceTicket
         f = File.new(filename_of_service_session_lookup(st), 'w')
         f.write(sid)
